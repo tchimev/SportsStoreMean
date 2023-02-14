@@ -1,11 +1,11 @@
 import * as mongodb from "mongodb";
+import { CartLine } from "./cartLine";
 import { Payment } from "./payment";
-import { Product } from "./product";
 
 export interface Order {
     _id?: mongodb.ObjectId;
     name: string;
-    products: Product[];
+    products: CartLine[];
     address: string;
     shipped: boolean;
     payment: Payment;
