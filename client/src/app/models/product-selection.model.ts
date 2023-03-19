@@ -1,5 +1,5 @@
 export interface ProductSelection{
-    id?: string;
+    productId?: string;
     name?: string;
     price?: number;
     quantity?: number;
