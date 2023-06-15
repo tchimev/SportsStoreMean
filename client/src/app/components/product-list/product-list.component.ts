@@ -18,11 +18,11 @@ export class ProductListComponent implements OnInit {
     this.fetchProducts();
   }
   
-  // deleteEmployee(id: string): void {
-  //   this.employeesService.deleteEmployee(id).subscribe({
-  //     next: () => this.fetchEmployees()
-  //   });
-  // }
+  deleteProduct(id: string): void {
+    this._productService.deleteProduct(id).subscribe({
+      next: () => this.fetchProducts()
+    });
+  }
   
   private fetchProducts(): void {
     this.products = this._productService.getProducts();

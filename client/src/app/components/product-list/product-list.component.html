@@ -12,11 +12,12 @@
         <div class="col-2">{{product.category}}</div>
         <div class="col-2">{{product.price}}</div>
         <div class="col-2">
-                    <button class="btn btn-primary" [routerLink]="['/detail', product.productId]">
+            <button class="btn btn-primary mr-1" [routerLink]="['/edit', product.productId]">
                 Details
             </button>
+            <button class="btn btn-danger" (click)="deleteProduct(product.productId || '')">Delete</button>
         </div>
     </div>
 </div>
 
-<button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Employee</button>
+<button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Product</button>
