@@ -22,14 +22,14 @@ private url:string = 'http://localhost:5200';
   }
 
   createProduct(product: Product): Observable<string> {
-    return this._httpClient.post<string>(`${this.url}/products`, product);
+    return this._httpClient.post(`${this.url}/products`, product, { responseType: 'text' });
   }
   
-  updateProduct(product: Product): Observable<string> {
-    return this._httpClient.put<string>(`${this.url}/products`, product);
+  updateProduct(id: string, product: Product): Observable<string> {
+    return this._httpClient.put(`${this.url}/products/${id}`, product, { responseType: 'text' });
   }
 
   deleteProduct(id: string): Observable<string> {
-    return this._httpClient.delete<string>(`${this.url}/products/${id}`);
+    return this._httpClient.delete(`${this.url}/products/${id}`, { responseType: 'text' });
   }
 }

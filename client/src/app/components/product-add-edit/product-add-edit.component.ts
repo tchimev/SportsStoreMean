@@ -26,6 +26,16 @@ export class ProductAddEditComponent implements OnInit {
     private _fb: FormBuilder) { 
 
     this.productId = this.route.snapshot.paramMap.get('id');
+    
+    let product: Product = {};
+    this.form = this._fb.group({
+      name: [product.name, Validators.required],
+      category: [product.category],
+      description: [product.description],
+      price: [product.price],
+      supplier: [product.supplier, Validators.required]
+    });
+
   }
   
   ngOnInit(): void {
@@ -41,19 +51,13 @@ export class ProductAddEditComponent implements OnInit {
     if (this.productId) {
         this._productService.getProduct(this.productId).subscribe({
             next: (p) => {
-                this.form = this._fb.group({
-                  name: [p.name, Validators.required],
-                  category: [p.category, Validators.required],
-                  description: [p.description],
-                  price: [p.price],
-                  supplier: [p.supplier, Validators.required]
-                });
+              this.form.patchValue(p);
             }});
-    }
+    } 
   }
 
   private updateProduct(product: Product) {
-    this._productService.updateProduct(product)
+    this._productService.updateProduct(this.productId || '', product)
       .subscribe({
         next: () => {
           this.router.navigate(['/products']);
@@ -80,7 +84,7 @@ export class ProductAddEditComponent implements OnInit {
 
   public submitForm(product: Product) {
     if (this.productId) {
-      product.productId = this.productId;
+      product._id = this.productId;
       this.updateProduct(product);
     } else {
       this.createProduct(product);

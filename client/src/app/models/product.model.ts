@@ -2,7 +2,7 @@ import { Supplier } from "./supplier.model";
 import { Rating } from "./rating.model";
 
 export interface Product {
-        productId?: string;
+        _id?: string;
         name?: string;
         category?: string;
         description?: string;

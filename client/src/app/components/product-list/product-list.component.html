@@ -1,3 +1,5 @@
+<h2 class="text-center m-5">List of Products</h2>
+
 <div class="w-100">
     <div class="row border">
         <div class="col-2">Name</div>
@@ -12,10 +14,10 @@
         <div class="col-2">{{product.category}}</div>
         <div class="col-2">{{product.price}}</div>
         <div class="col-2">
-            <button class="btn btn-primary mr-1" [routerLink]="['/edit', product.productId]">
-                Details
+            <button class="btn btn-primary mr-1" [routerLink]="['edit', product._id]">
+                Edit
             </button>
-            <button class="btn btn-danger" (click)="deleteProduct(product.productId || '')">Delete</button>
+            <button class="btn btn-danger" (click)="deleteProduct(product._id || '')">Delete</button>
         </div>
     </div>
 </div>
