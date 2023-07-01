@@ -1,5 +1,5 @@
 export interface Supplier {
-        supplierId?: string;
+        _id?: string;
         name?: string;
         city?: string;
         state?: string;

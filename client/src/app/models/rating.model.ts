@@ -1,7 +1,7 @@
 import { Product } from "./product.model";
 
 export interface Rating {
-        ratingId?: string;
+        _id?: string;
         stars?: number;
         product?: Product;
 }
