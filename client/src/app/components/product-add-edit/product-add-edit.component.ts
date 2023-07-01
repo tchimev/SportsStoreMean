@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product.model';
-import { Supplier } from 'src/app/models/supplier.model';
-import { ProductService } from 'src/app/services/product.service';
-import { SupplierService } from 'src/app/services/supplier.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Product } from "src/app/models/product.model";
+import { Supplier } from "src/app/models/supplier.model";
+import { ProductService } from "src/app/services/product.service";
+import { SupplierService } from "src/app/services/supplier.service";
 
 @Component({
-  selector: 'app-product-add-edit',
-  templateUrl: './product-add-edit.component.html',
-  styles: [
-  ]
+  selector: "app-product-add-edit",
+  templateUrl: "./product-add-edit.component.html",
+  styles: [],
 })
 export class ProductAddEditComponent implements OnInit {
   public productId: string | null;
@@ -23,71 +22,70 @@ export class ProductAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private _productService: ProductService,
     private _supplierService: SupplierService,
-    private _fb: FormBuilder) { 
+    private _fb: FormBuilder
+  ) {
+    this.productId = this.route.snapshot.paramMap.get("id");
 
-    this.productId = this.route.snapshot.paramMap.get('id');
-    
     let product: Product = {};
     this.form = this._fb.group({
       name: [product.name, Validators.required],
       category: [product.category],
       description: [product.description],
       price: [product.price],
-      supplier: [product.supplier, Validators.required]
+      supplierName: [product.supplier?.name, Validators.required],
     });
-
   }
-  
+
   ngOnInit(): void {
     this.fetchProduct();
     this._supplierService.getSuppliers().subscribe({
       next: (s) => {
         this.suppliers = s;
-      }
+      },
     });
   }
-    
+
   private fetchProduct(): void {
     if (this.productId) {
-        this._productService.getProduct(this.productId).subscribe({
-            next: (p) => {
-              this.form.patchValue(p);
-            }});
-    } 
+      this._productService.getProduct(this.productId).subscribe({
+        next: (p) => {
+          this.form.patchValue(p);
+        },
+      });
+    }
   }
 
   private updateProduct(product: Product) {
-    this._productService.updateProduct(this.productId || '', product)
+    this._productService
+      .updateProduct(this.productId || "", product)
       .subscribe({
         next: () => {
-          this.router.navigate(['/products']);
+          this.router.navigate(["/products"]);
         },
         error: (error) => {
-          alert('Failed to update product');
+          alert("Failed to update product");
           console.error(error);
-        }
-      })
+        },
+      });
   }
 
   private createProduct(product: Product) {
-    this._productService.createProduct(product)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/products']);
-        },
-        error: (error) => {
-          alert("Failed to create product");
-          console.error(error);
-        }
-      });
+    this._productService.createProduct(product).subscribe({
+      next: () => {
+        this.router.navigate(["/products"]);
+      },
+      error: (error) => {
+        alert("Failed to create product");
+        console.error(error);
+      },
+    });
   }
 
   public submitForm(product: Product) {
     if (this.productId) {
-      product._id = this.productId;
       this.updateProduct(product);
     } else {
       this.createProduct(product);
     }
   }
- }
+}

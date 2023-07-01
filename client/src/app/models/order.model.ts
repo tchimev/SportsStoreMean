@@ -2,7 +2,7 @@ import { CartLine } from "./cart-line.model";
 import { Payment } from "./payment.model";
 
 export interface Order {
-    orderId?: string;
+    _id?: string;
     name?: string;
     address?: string;
     payment?: Payment;

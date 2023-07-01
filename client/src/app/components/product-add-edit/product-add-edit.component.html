@@ -1,39 +1,55 @@
 <h2 *ngIf="!productId" class="text-center m-5">Add a New Product</h2>
 <h2 *ngIf="productId" class="text-center m-5">Edit Product</h2>
 
-<form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
-<div class="mb-2">
+<form class="mx-2" [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+  <div class="mb-2">
     <label>Name</label>
-    <input class="form-control" type="text" formControlName="name" 
-        [ngClass]="{ 'is-invalid': form.controls['name'].errors }"/>
+    <input
+      class="form-control"
+      type="text"
+      formControlName="name"
+      [ngClass]="{ 'is-invalid': form.controls['name'].errors }"
+    />
 
     <div *ngIf="form.controls['name'].errors" class="invalid-feedback">
-        <div *ngIf="form.controls['name'].errors['required']">Name is required</div>
+      <div *ngIf="form.controls['name'].errors['required']">
+        Name is required
+      </div>
     </div>
-</div>
-<div class="mb-2">
+  </div>
+  <div class="mb-2">
     <label>Category</label>
-    <input class="form-control" type="text" formControlName="category"/>
-</div>
-<div class="mb-2">
+    <input class="form-control" type="text" formControlName="category" />
+  </div>
+  <div class="mb-2">
     <label>Supplier</label>
-    <select class="form-control" formControlName="supplier"
-        [ngClass]="{ 'is-invalid': form.controls['supplier'].errors }">
-        <option *ngFor="let s of suppliers" [ngValue]="s">{{s.name}}</option>
+    <select
+      class="form-control"
+      formControlName="supplierName"
+      [ngClass]="{ 'is-invalid': form.controls['supplierName'].errors }"
+    >
+      <option *ngFor="let s of suppliers" [ngValue]="s.name">{{ s.name }}</option>
     </select>
 
-    <div *ngIf=" form.controls['supplier'].errors" class="invalid-feedback">
-        <div *ngIf="form.controls['supplier'].errors['required']">Supplier is required</div>
+    <div *ngIf="form.controls['supplierName'].errors" class="invalid-feedback">
+      <div *ngIf="form.controls['supplierName'].errors['required']">
+        Supplier is required
+      </div>
     </div>
-</div>
-<div class="mb-2">
+  </div>
+  <div class="mb-2">
     <label>Description</label>
     <textarea class="form-control" formControlName="description"></textarea>
-</div>
-<div class="mb-2">
+  </div>
+  <div class="mb-2">
     <label>Price</label>
     <input class="form-control" type="number" formControlName="price" />
-</div>
+  </div>
 
-<button class="btn btn-primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button class="btn btn-secondary me-2" type="button" [routerLink]="['/']">
+    Cancel
+  </button>
+  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+    Save
+  </button>
 </form>

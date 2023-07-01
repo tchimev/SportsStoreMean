@@ -1,25 +1,29 @@
 <h2 class="text-center m-5">List of Products</h2>
 
-<div class="w-100">
-    <div class="row border">
-        <div class="col-2">Name</div>
-        <div class="col-4">Description</div>
-        <div class="col-2">Category</div>
-        <div class="col-2">Price</div>
-        <div class="col-2">Action</div>
+<div class="w-100 ms-2">
+  <div class="row border bg-light fw-bold">
+    <div class="col-2">Name</div>
+    <div class="col-4">Description</div>
+    <div class="col-2">Category</div>
+    <div class="col-2">Price</div>
+    <div class="col-2">Action</div>
+  </div>
+  <div class="row border-bottom mt-1" *ngFor="let product of products | async">
+    <div class="col-2">{{ product.name }}</div>
+    <div class="col-4">{{ product.description }}</div>
+    <div class="col-2">{{ product.category }}</div>
+    <div class="col-2">{{ product.price }}</div>
+    <div class="col-2">
+      <button class="btn btn-primary me-1" [routerLink]="['edit', product._id]">
+        Edit
+      </button>
+      <button class="btn btn-danger" (click)="deleteProduct(product._id || '')">
+        Delete
+      </button>
     </div>
-    <div class="row border-bottom mt-1" *ngFor="let product of products | async">
-        <div class="col-2">{{product.name}}</div>
-        <div class="col-4">{{product.description}}</div>
-        <div class="col-2">{{product.category}}</div>
-        <div class="col-2">{{product.price}}</div>
-        <div class="col-2">
-            <button class="btn btn-primary mr-1" [routerLink]="['edit', product._id]">
-                Edit
-            </button>
-            <button class="btn btn-danger" (click)="deleteProduct(product._id || '')">Delete</button>
-        </div>
-    </div>
+  </div>
 </div>
 
-<button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Product</button>
+<button class="btn btn-primary ms-2 mt-3" [routerLink]="['new']">
+  Add a New Product
+</button>
