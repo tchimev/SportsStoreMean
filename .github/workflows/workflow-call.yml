@@ -6,4 +6,4 @@ on:
     branches: [ main, master ]
 jobs:
   call-workflow-playwright:
-    uses: ./client/.github/workflows/playwright.yml
+    uses: ./.github/workflows/playwright.yml
