@@ -1,0 +1,9 @@
+name: Call reusable workflow
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  call-workflow-playwright:
+    uses: ./client/.github/workflows/playwright.yml
